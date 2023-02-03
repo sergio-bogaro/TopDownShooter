@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bthralr1f28bc"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_d0yty"]
+[ext_resource type="Texture2D" uid="uid://da2f54o5bmeyp" path="res://icon.svg" id="1_yunuw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gd0wi"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_d0yty")
+MAX_SPEED = 200
+ACCELERATION = 300
+FRICTION = 600
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_yunuw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gd0wi")
+debug_color = Color(0.854902, 0.223529, 0.729412, 0.419608)
+
+[node name="SpellCaster" type="Node2D" parent="."]
+
+[node name="Colldowns" type="Node" parent="."]
+
+[node name="BasicAttack" type="Timer" parent="Colldowns"]
+wait_time = 0.2
+
+[connection signal="timeout" from="Colldowns/BasicAttack" to="." method="_on_basic_attack_timeout"]
