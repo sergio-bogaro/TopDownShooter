@@ -7,8 +7,7 @@ func _ready():
 	hurtBox.take_damage.connect(TakeDamage)
 
 func TakeDamage(damage):
-	pass
-
+	print(damage)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
