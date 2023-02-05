@@ -1,21 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://b51j1ayh0kp8e"]
+[gd_scene load_steps=6 format=3 uid="uid://b51j1ayh0kp8e"]
 
+[ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_2aexj"]
 [ext_resource type="PackedScene" uid="uid://bhkr87h4bwp4p" path="res://Resources/Health.tscn" id="1_avijp"]
-[ext_resource type="Texture2D" uid="uid://da2f54o5bmeyp" path="res://icon.svg" id="1_ekegv"]
 [ext_resource type="PackedScene" uid="uid://d3ae2fnyfmexi" path="res://Resources/HurtBox.tscn" id="2_cedrk"]
+[ext_resource type="Texture2D" uid="uid://ddsx3m5rx1fwj" path="res://Enemies/idle_0.png" id="2_kvbbk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqaaa"]
+size = Vector2(28, 28)
 
 [node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_2aexj")
+knockBackResistance = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_ekegv")
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_kvbbk")
 
-[node name="Health" parent="." node_paths=PackedStringArray("hurtBox") instance=ExtResource("1_avijp")]
-MAX_HP = 20
-hurtBox = NodePath("../HurtBox")
+[node name="Health" parent="." instance=ExtResource("1_avijp")]
+MAX_HP = 100
 
 [node name="HurtBox" parent="." instance=ExtResource("2_cedrk")]
 collision_layer = 0
