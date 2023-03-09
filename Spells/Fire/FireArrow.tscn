@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://0vdc333ao4v7"]
+
+[ext_resource type="PackedScene" uid="uid://depjaumajgdd0" path="res://Spells/Projectile.tscn" id="1_xtvil"]
+[ext_resource type="Script" path="res://SpellData.gd" id="2_gp703"]
+[ext_resource type="Texture2D" uid="uid://bxudqrkjaydwu" path="res://Spells/Sprites/Projectiles.png" id="3_s410d"]
+
+[sub_resource type="Resource" id="Resource_i0tmw"]
+script = ExtResource("2_gp703")
+Damage = 5
+KnockBackForce = 30
+spellCooldown = 0.4
+DamageTypeSelect = 0
+castingMethod = 0
+maxCastTime = null
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xpk6d"]
+radius = 4.0
+
+[node name="BassicAttack" instance=ExtResource("1_xtvil")]
+spellData = SubResource("Resource_i0tmw")
+ProjectileSpeed = 400
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_s410d")
+hframes = 4
+region_rect = Rect2(10, 10, 28, 28)
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_xpk6d")

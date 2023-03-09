@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://bhc0m1txo10mw"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_d0yty"]
+[ext_resource type="Texture2D" uid="uid://bge7b2fs2wy00" path="res://Player/PlayerSprites/Character.png" id="2_tsunf"]
+[ext_resource type="Script" path="res://Player/Dash.gd" id="3_k6umj"]
+[ext_resource type="PackedScene" uid="uid://cv6hwl6hmaofm" path="res://Resources/HurtBoxPlayer.tscn" id="3_x8gkw"]
+[ext_resource type="Script" path="res://Resources/HurtBoxPlayer.gd" id="4_j3ok0"]
+[ext_resource type="PackedScene" uid="uid://bhkr87h4bwp4p" path="res://Resources/Health.tscn" id="9_6es6l"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6kcjg"]
+radius = 6.0
+height = 14.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yx3ua"]
+radius = 3.0
+height = 12.0
+
+[node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
+texture_filter = 1
+collision_layer = 2
+script = ExtResource("1_d0yty")
+
+[node name="HurtBoxPlayer" parent="." instance=ExtResource("3_x8gkw")]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("4_j3ok0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxPlayer"]
+shape = SubResource("CapsuleShape2D_6kcjg")
+
+[node name="Health" parent="." instance=ExtResource("9_6es6l")]
+MAX_HP = 5
+
+[node name="Sprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+texture = ExtResource("2_tsunf")
+hframes = 2
+vframes = 2
+frame = 2
+
+[node name="ColisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_yx3ua")
+debug_color = Color(0.854902, 0.223529, 0.729412, 0.419608)
+
+[node name="Dash" type="Node2D" parent="."]
+script = ExtResource("3_k6umj")
+
+[node name="DashTimer" type="Timer" parent="Dash"]
+one_shot = true
+
+[node name="InvencibilityTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="area_entered" from="HurtBoxPlayer" to="HurtBoxPlayer" method="_on_area_entered"]

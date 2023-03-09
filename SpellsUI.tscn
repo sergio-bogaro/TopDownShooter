@@ -1,0 +1,94 @@
+[gd_scene load_steps=3 format=3 uid="uid://ldtjjvn2xwkc"]
+
+[ext_resource type="Script" path="res://Singletons/SpellsUI.gd" id="1_eoqwd"]
+
+[sub_resource type="FontFile" id="FontFile_1pjy0"]
+face_index = null
+embolden = null
+transform = null
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/10/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/18/0 = Vector2(0, 0)
+cache/0/10/0/ascent = 0.0
+cache/0/10/0/descent = 0.0
+cache/0/10/0/underline_position = 0.0
+cache/0/10/0/underline_thickness = 0.0
+cache/0/10/0/scale = 1.0
+cache/0/10/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/10/0/kerning_overrides/10/0 = Vector2(0, 0)
+cache/0/10/0/kerning_overrides/18/0 = Vector2(0, 0)
+cache/0/18/0/ascent = 0.0
+cache/0/18/0/descent = 0.0
+cache/0/18/0/underline_position = 0.0
+cache/0/18/0/underline_thickness = 0.0
+cache/0/18/0/scale = 1.0
+cache/0/18/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/18/0/kerning_overrides/10/0 = Vector2(0, 0)
+cache/0/18/0/kerning_overrides/18/0 = Vector2(0, 0)
+
+[node name="SpellUI" type="CanvasLayer"]
+script = ExtResource("1_eoqwd")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.875
+anchor_right = 0.75
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_constants/separation = 20
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Spell_1_CD" type="Label" parent="Control/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontFile_1pjy0")
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Spell_2_CD" type="Label" parent="Control/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontFile_1pjy0")
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Spell_3_CD" type="Label" parent="Control/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontFile_1pjy0")
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Spell_4_CD" type="Label" parent="Control/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontFile_1pjy0")
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

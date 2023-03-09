@@ -1,27 +1,77 @@
-[gd_scene load_steps=6 format=3 uid="uid://b51j1ayh0kp8e"]
+[gd_scene load_steps=14 format=3 uid="uid://uxweqpggxnv1"]
 
 [ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_2aexj"]
 [ext_resource type="PackedScene" uid="uid://bhkr87h4bwp4p" path="res://Resources/Health.tscn" id="1_avijp"]
 [ext_resource type="PackedScene" uid="uid://d3ae2fnyfmexi" path="res://Resources/HurtBox.tscn" id="2_cedrk"]
 [ext_resource type="Texture2D" uid="uid://ddsx3m5rx1fwj" path="res://Enemies/idle_0.png" id="2_kvbbk"]
+[ext_resource type="Script" path="res://Resources/HitBox.gd" id="4_kew7n"]
+[ext_resource type="PackedScene" uid="uid://crx4vl2ur0cgo" path="res://Resources/PlayerDetection.tscn" id="5_nw7hf"]
+[ext_resource type="Script" path="res://Resources/PlayerDetection.gd" id="6_1iecl"]
+[ext_resource type="PackedScene" path="res://Spells/StautusEffect/FireEffect.tscn" id="8_eupgu"]
+[ext_resource type="PackedScene" path="res://Spells/StautusEffect/IceEffect.tscn" id="9_1f2eo"]
+[ext_resource type="PackedScene" path="res://Spells/StautusEffect/ShadowArts.tscn" id="10_r7fmi"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqaaa"]
-size = Vector2(28, 28)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5yr1h"]
+radius = 12.0
+height = 40.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lw3o3"]
+radius = 14.0
+height = 42.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7y0to"]
+radius = 224.644
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_2aexj")
-knockBackResistance = 2
+ACCELERATION = 200
+MAX_SPEED = 150
+FRICTION = 200
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -21)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("2_kvbbk")
 
 [node name="Health" parent="." instance=ExtResource("1_avijp")]
 MAX_HP = 100
 
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("4_kew7n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CapsuleShape2D_5yr1h")
+
 [node name="HurtBox" parent="." instance=ExtResource("2_cedrk")]
-collision_layer = 0
+collision_layer = 64
 collision_mask = 4
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBox"]
-shape = SubResource("RectangleShape2D_wqaaa")
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_lw3o3")
+
+[node name="PlayerDetection" parent="." instance=ExtResource("5_nw7hf")]
+visible = false
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_1iecl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+shape = SubResource("CircleShape2D_7y0to")
+
+[node name="StatusEffectHandler" type="Node2D" parent="."]
+
+[node name="FireEffectHandler" parent="StatusEffectHandler" node_paths=PackedStringArray("enemyHealthNode") instance=ExtResource("8_eupgu")]
+enemyHealthNode = NodePath("../../Health")
+
+[node name="IceEffectHandler" parent="StatusEffectHandler" node_paths=PackedStringArray("Enemy") instance=ExtResource("9_1f2eo")]
+Enemy = NodePath("../..")
+
+[node name="ShadowArtsEffectHandler" parent="StatusEffectHandler" node_paths=PackedStringArray("enemyHealthNode") instance=ExtResource("10_r7fmi")]
+enemyHealthNode = NodePath("../../Health")
+
+[connection signal="body_entered" from="PlayerDetection" to="PlayerDetection" method="BodyEntered"]

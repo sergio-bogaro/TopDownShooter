@@ -1,12 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4br7ght7yncs"]
+[gd_scene load_steps=4 format=3 uid="uid://cp3duu1uj741w"]
 
-[ext_resource type="PackedScene" uid="uid://bthralr1f28bc" path="res://Player/player.tscn" id="1_vvtf1"]
-[ext_resource type="PackedScene" uid="uid://b51j1ayh0kp8e" path="res://Enemies/enemy.tscn" id="2_ukvno"]
+[ext_resource type="Script" path="res://Map/World.gd" id="1_72nh0"]
+[ext_resource type="PackedScene" uid="uid://uxweqpggxnv1" path="res://Enemies/enemy.tscn" id="2_ukvno"]
+[ext_resource type="PackedScene" uid="uid://cfq4xkmcwix5k" path="res://Player/SwordMan/SwordMan.tscn" id="3_hbu5w"]
 
 [node name="World" type="Node2D"]
-
-[node name="Player" parent="." instance=ExtResource("1_vvtf1")]
-position = Vector2(237, 240)
+script = ExtResource("1_72nh0")
 
 [node name="Enemy" parent="." instance=ExtResource("2_ukvno")]
 position = Vector2(410, 229)
+ACCELERATION = 0
+MAX_SPEED = 0
+FRICTION = 0
+
+[node name="Swordman" parent="." instance=ExtResource("3_hbu5w")]
+position = Vector2(245, 221)
+MAX_SPEED = 120
+DASH_SPEED = 500
+ACCELERATION = 150
+FRICTION = 200
+
+[node name="Camera2D" type="Camera2D" parent="Swordman"]

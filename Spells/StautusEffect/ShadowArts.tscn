@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Spells/StautusEffect/ShadowArts.gd" id="1_gqsva"]
+[ext_resource type="Texture2D" uid="uid://da2f54o5bmeyp" path="res://icon.svg" id="2_kku8i"]
+
+[node name="ShadowArtsEffectHandler" type="Node2D"]
+script = ExtResource("1_gqsva")
+
+[node name="EffectExplosionTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Indicator" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -32)
+scale = Vector2(0.13, 0.13)
+texture = ExtResource("2_kku8i")
+
+[connection signal="timeout" from="EffectExplosionTimer" to="." method="EffectExplosionTimeout"]

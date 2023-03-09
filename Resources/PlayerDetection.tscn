@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://crx4vl2ur0cgo"]
+
+[node name="PlayerDetection" type="Area2D"]

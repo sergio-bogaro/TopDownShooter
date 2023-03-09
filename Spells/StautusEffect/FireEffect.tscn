@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Spells/StautusEffect/FireEffect.gd" id="1_qy6os"]
+
+[node name="FireEffectHandler" type="Node2D"]
+script = ExtResource("1_qy6os")
+
+[node name="DamageTimer" type="Timer" parent="."]
+
+[node name="StatusDurationTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="DamageTimer" to="." method="DamageTimerTimeout"]
+[connection signal="timeout" from="StatusDurationTimer" to="." method="StatusDurationTimeout"]

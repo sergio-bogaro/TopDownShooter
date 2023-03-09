@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://depjaumajgdd0"]
+
+[ext_resource type="Script" path="res://Spells/Scripts/Projectile.gd" id="1_mpg6y"]
+
+[node name="BassicAttack" type="Area2D"]
+collision_layer = 4
+collision_mask = 64
+script = ExtResource("1_mpg6y")
+ProjectileSpeed = 250
+Pierce = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="onScreen" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="HitEnemy"]
+[connection signal="screen_exited" from="onScreen" to="." method="ScreenExited"]

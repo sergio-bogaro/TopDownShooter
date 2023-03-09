@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://g01xmcrwa4ay"]
+
+[ext_resource type="Script" path="res://Player/SwordMan/HookArea.gd" id="1_8n5y1"]
+[ext_resource type="Texture2D" uid="uid://da2f54o5bmeyp" path="res://icon.svg" id="2_wdcjq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x1dei"]
+size = Vector2(5.5, 5.5)
+
+[node name="HookArea" type="Area2D"]
+collision_layer = 0
+collision_mask = 64
+script = ExtResource("1_8n5y1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_wdcjq")
+
+[node name="ColisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_x1dei")
