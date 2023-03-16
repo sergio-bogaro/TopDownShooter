@@ -10,7 +10,7 @@
 [sub_resource type="Resource" id="Resource_oe2vq"]
 script = ExtResource("5_4dytm")
 Damage = 5
-KnockBackForce = 100
+KnockBackForce = 300
 DamageType = "Normal"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iibba"]
@@ -335,6 +335,7 @@ disabled = true
 
 [node name="SwordSprite" type="Sprite2D" parent="Weapon/HitBox" index="1"]
 rotation = -1.5708
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("3_rei11")
 offset = Vector2(0, -8)
 
@@ -344,9 +345,9 @@ one_shot = true
 
 [node name="Hook" type="Node2D" parent="." index="7"]
 script = ExtResource("6_bfejq")
+hookCD = 3.0
 
-[node name="HookPostion" type="Marker2D" parent="Hook" index="0"]
-position = Vector2(13, 0)
+[node name="HookCD" type="Timer" parent="Hook" index="0"]
 
 [node name="AttackAnimations" type="AnimationPlayer" parent="." index="8"]
 root_node = NodePath("../Weapon")

@@ -9,10 +9,12 @@ enum knockBackResistanceValues {
 @export var MAX_SPEED: int
 @export var FRICTION: int
 @export var ATTACK_RANGE: Vector2
+@export var stunTime: float 
 
 @export var knockBackResistance: knockBackResistanceValues = knockBackResistanceValues.normal
 
 @onready var playerDetection = $PlayerDetection
+@onready var stunTimer: Timer = $StunTimer
 @onready var hurtBox = $HurtBox
 @onready var healthNode = $Health
 @onready var sprite = $Sprite2D
@@ -24,6 +26,7 @@ enum knockBackResistanceValues {
 var Player = null
 var speedReduction: float = 1
 var frozen: bool = false
+var stunned: bool = false
 
 var knockBackTween: Tween
 var knockBackVector: Vector2 = Vector2.ZERO
@@ -35,13 +38,23 @@ func _ready():
 	playerDetection.player_detected.connect(PlayerDetected)
 
 func _physics_process(delta):
-	if Player && !frozen:
+	var canMove: bool = !frozen && !stunned
+	
+	if Player && canMove:
 		var direction = (Player.global_position - global_position).normalized()
 		var movementSpeed = MAX_SPEED * speedReduction
 		speed = speed.move_toward(direction * movementSpeed, ACCELERATION * delta) 
+	else:
+		speed = Vector2.ZERO
 		
 	velocity = speed + knockBackVector
 	move_and_slide()
+
+func StunEnemy():
+	stunned = true
+	stunTimer.start(stunTime)
+	await  stunTimer.timeout 
+	stunned = false
 
 func PlayerDetected(area):
 	Player = area

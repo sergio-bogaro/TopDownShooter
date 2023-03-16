@@ -9,9 +9,10 @@ script = ExtResource("1_72nh0")
 
 [node name="Enemy" parent="." instance=ExtResource("2_ukvno")]
 position = Vector2(410, 229)
-ACCELERATION = 0
-MAX_SPEED = 0
-FRICTION = 0
+ACCELERATION = 50
+MAX_SPEED = 30
+FRICTION = 50
+stunTime = 3.0
 
 [node name="Swordman" parent="." instance=ExtResource("3_hbu5w")]
 position = Vector2(245, 221)

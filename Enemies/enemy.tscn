@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://uxweqpggxnv1"]
+[gd_scene load_steps=15 format=3 uid="uid://uxweqpggxnv1"]
 
 [ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_2aexj"]
 [ext_resource type="PackedScene" uid="uid://bhkr87h4bwp4p" path="res://Resources/Health.tscn" id="1_avijp"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" path="res://Spells/StautusEffect/FireEffect.tscn" id="8_eupgu"]
 [ext_resource type="PackedScene" path="res://Spells/StautusEffect/IceEffect.tscn" id="9_1f2eo"]
 [ext_resource type="PackedScene" path="res://Spells/StautusEffect/ShadowArts.tscn" id="10_r7fmi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mwchj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5yr1h"]
 radius = 12.0
@@ -27,6 +29,9 @@ script = ExtResource("1_2aexj")
 ACCELERATION = 200
 MAX_SPEED = 150
 FRICTION = 200
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mwchj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -21)
@@ -73,5 +78,7 @@ Enemy = NodePath("../..")
 
 [node name="ShadowArtsEffectHandler" parent="StatusEffectHandler" node_paths=PackedStringArray("enemyHealthNode") instance=ExtResource("10_r7fmi")]
 enemyHealthNode = NodePath("../../Health")
+
+[node name="StunTimer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="PlayerDetection" to="PlayerDetection" method="BodyEntered"]
